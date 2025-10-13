@@ -21,6 +21,7 @@ You define *what* happens through contracts and *how* through actors — stores 
 @Contract("orders.create")
 public record OrderCreate(String customerId, BigDecimal total) {}
 
+@Actor
 public class OrderActor {
     private final StoreState<Order> orders;
     public Order on(OrderCreate c) {
