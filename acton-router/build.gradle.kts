@@ -5,7 +5,7 @@ plugins {
 
 group = "dev.acton"
 version = "0.1.0-SNAPSHOT"
-description = "ActOn Core — Foundation of the ActOn Framework"
+description = "ActOn Router — Contract discovery and actor binding"
 
 java {
     toolchain { languageVersion.set(JavaLanguageVersion.of(21)) }
@@ -14,6 +14,8 @@ java {
 }
 
 dependencies {
+    api(project(":acton-core"))
+
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
 }
 
@@ -22,8 +24,8 @@ publishing {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
             pom {
-                name.set("ActOn Core")
-                description.set("Core building blocks: Contract, Actor, Store.")
+                name.set("ActOn Router")
+                description.set("Maps @Contract to Actor.on(...) and executes handlers.")
                 url.set("https://github.com/mauriciobelusso/acton")
                 licenses {
                     license {

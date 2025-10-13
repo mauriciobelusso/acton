@@ -1,2 +1,6 @@
 rootProject.name = "acton"
-include("acton-core")
+
+include(
+    "acton-core",
+    "acton-router"
+)
