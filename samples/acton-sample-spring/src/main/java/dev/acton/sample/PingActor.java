@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PingActor implements Actor {
-    public Map<String, String> on(Ping p) {
-        return Map.of("Echo", p.message());
+    public Map<String, String> on(Ping ping) {
+        return Map.of("Echo", ping.message());
     }
 }

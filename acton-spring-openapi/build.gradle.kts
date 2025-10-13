@@ -7,7 +7,6 @@ description = "ActOn OpenAPI Spring — Springdoc adapter (no own endpoint/UI)"
 repositories { mavenCentral() }
 
 dependencies {
-    api(project(":acton-openapi")) // gera OpenAPI a partir dos Actors
     api(project(":acton-spring"))  // registra endpoints e expõe Actors
 
     // Spring Boot autoconfig

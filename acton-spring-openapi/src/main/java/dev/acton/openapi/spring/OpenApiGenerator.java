@@ -1,7 +1,8 @@
-package dev.acton.openapi;
+package dev.acton.openapi.spring;
 
 import dev.acton.core.actor.Actor;
 import dev.acton.core.annotation.Contract;
+import dev.acton.router.spring.util.MethodUtils;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.PathItem;
@@ -33,17 +34,20 @@ public class OpenApiGenerator {
 
         for (Actor actor : actors) {
             for (Method method : actor.getClass().getMethods()) {
-                if (!method.getName().equals("on") || method.getParameterCount() == 0) continue;
-                Class<?> payloadType = method.getParameters()[0].getType();
-                Contract c = payloadType.getAnnotation(Contract.class);
-                if (c == null) continue;
+                var payloadOpt = MethodUtils.getPayload(method);
 
-                var http = c.http();
-                String path = !http.path().isEmpty() ? http.path() : "/" + c.value();
+                if (payloadOpt.isEmpty()) continue;
+
+                var payload = payloadOpt.get();
+
+                var contract = MethodUtils.getContract(payload);
+
+                var http = contract.http();
+                String path = !http.path().isEmpty() ? http.path() : "/" + contract.value();
                 PathItem.HttpMethod verb = toOpenApiMethod(http.method());
 
                 // request body schema
-                Schema<?> requestSchema = schemaFor(payloadType);
+                Schema<?> requestSchema = schemaFor(payload.getType());
                 var requestBody = new RequestBody()
                         .content(new Content().addMediaType(http.consumes()[0],
                                 new MediaType().schema(requestSchema)));
@@ -58,7 +62,7 @@ public class OpenApiGenerator {
                 PathItem item = api.getPaths().computeIfAbsent(path, k -> new PathItem());
                 item.operation(verb, new io.swagger.v3.oas.models.Operation()
                         .operationId(method.getName())
-                        .summary(c.description())
+                        .summary(contract.description())
                         .requestBody(requestBody)
                         .responses(responses));
             }
@@ -81,7 +85,7 @@ public class OpenApiGenerator {
         Schema<?> schema = new Schema<>();
         schema.setType("object");
         for (RecordComponent rc : type.getRecordComponents()) {
-            schema.addProperties(rc.getName(), new Schema<>().type(mapType(rc.getType())));
+            schema.addProperty(rc.getName(), new Schema<>().type(mapType(rc.getType())));
         }
         return schema;
     }

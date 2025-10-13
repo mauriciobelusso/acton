@@ -1,7 +1,6 @@
 package dev.acton.openapi.spring;
 
 import dev.acton.core.actor.Actor;
-import dev.acton.openapi.OpenApiGenerator;
 import io.swagger.v3.oas.models.OpenAPI;
 import java.util.Collection;
 import org.springdoc.core.customizers.OpenApiCustomizer;
