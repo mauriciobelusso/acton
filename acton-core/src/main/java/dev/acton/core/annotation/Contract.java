@@ -18,12 +18,15 @@ public @interface Contract {
     /** Optional HTTP override; omit for name-based defaults. */
     Http http() default @Http;
 
-    enum Method { GET, POST, PUT, DELETE, PATCH }
-
     @Target({})
     @Retention(RetentionPolicy.RUNTIME)
     @interface Http {
+
+        enum Method { GET, POST, PUT, DELETE, PATCH }
+
         Method method() default Method.POST;   // default if provided without fields
         String path() default "";              // empty ⇒ derive from name
+        String[] consumes() default {"application/json"};
+        String[] produces() default {"application/json"};
     }
 }

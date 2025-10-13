@@ -2,6 +2,5 @@ package dev.acton.sample;
 
 import dev.acton.core.annotation.Contract;
 
-@Contract("ping.echo")
+@Contract(value = "ping.echo")
 public record Ping(String message) {}
-

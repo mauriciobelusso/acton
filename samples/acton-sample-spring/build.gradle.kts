@@ -11,9 +11,8 @@ repositories { mavenCentral() }
 
 dependencies {
     implementation(project(":acton-core"))
-    implementation(project(":acton-router"))
-    implementation(project(":acton-router-spring"))
-    implementation(project(":acton-openapi-spring"))
+    implementation(project(":acton-spring"))
+    implementation(project(":acton-spring-openapi"))
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.13")
     implementation("org.springframework.boot:spring-boot-starter")
 }

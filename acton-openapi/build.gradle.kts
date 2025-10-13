@@ -7,11 +7,10 @@ description = "ActOn OpenAPI — generator from ActOn Router routes"
 repositories { mavenCentral() }
 
 dependencies {
-    api(project(":acton-router"))
+    api(project(":acton-core"))
 
     implementation("io.swagger.core.v3:swagger-core-jakarta:2.2.38")
     implementation("io.swagger.core.v3:swagger-models-jakarta:2.2.38")
-    implementation("tools.jackson.core:jackson-databind:3.0.0")
 
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
 }
