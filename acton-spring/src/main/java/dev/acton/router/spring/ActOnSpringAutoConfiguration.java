@@ -13,14 +13,18 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 public class ActOnSpringAutoConfiguration {
 
     @Bean
-    WebMvcConfigurer actOnMvcConfigurer(ObjectMapper mapper, ApplicationContext ctx) {
+    WebMvcConfigurer actOnWebMvcConfigurer(ObjectMapper mapper) {
         return new WebMvcConfigurer() {
             @Override
             public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
                 resolvers.add(new ContractPayloadArgumentResolver(mapper));
-                resolvers.add(new StoreStateArgumentResolver(ctx));
             }
         };
+    }
+
+    @Bean
+    ActOnHandlerAdapterCustomizer actOnHandlerAdapterCustomizer(ObjectMapper mapper) {
+        return new ActOnHandlerAdapterCustomizer(mapper);
     }
 
     @Bean
