@@ -1,8 +1,7 @@
 package dev.acton.openapi.spring;
 
-import dev.acton.core.actor.Actor;
 import dev.acton.core.annotation.Contract;
-import dev.acton.router.spring.util.MethodUtils;
+import dev.acton.spring.util.MethodUtils;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.PathItem;
@@ -22,7 +21,7 @@ import java.util.List;
 
 public class OpenApiGenerator {
 
-    public OpenAPI generate(Collection<Actor> actors) {
+    public OpenAPI generate(Collection<Object> actors) {
         OpenAPI api = new OpenAPI()
                 .info(new Info()
                         .title("ActOn API")
@@ -32,7 +31,7 @@ public class OpenApiGenerator {
                 .components(new Components())
                 .servers(List.of(new Server().url("/")));
 
-        for (Actor actor : actors) {
+        for (Object actor : actors) {
             for (Method method : actor.getClass().getMethods()) {
                 var payloadOpt = MethodUtils.getPayload(method);
 

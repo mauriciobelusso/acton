@@ -1,4 +1,4 @@
-package dev.acton.router.spring;
+package dev.acton.spring;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
@@ -12,6 +12,12 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 
 @AutoConfiguration
 public class ActOnSpringAutoConfiguration {
+
+    @Bean
+    @Role(ROLE_INFRASTRUCTURE)
+    static ActOnActorScanner actOnActorScanner() {
+        return new ActOnActorScanner();
+    }
 
     @Bean
     WebMvcConfigurer actOnWebMvcConfigurer(ObjectMapper mapper) {

@@ -1,4 +1,4 @@
-package dev.acton.router.spring;
+package dev.acton.spring;
 
 import dev.acton.core.store.StoreState;
 import org.springframework.context.ApplicationContext;

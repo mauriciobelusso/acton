@@ -1,4 +1,4 @@
-package dev.acton.router.spring.util;
+package dev.acton.spring.util;
 
 import dev.acton.core.annotation.Contract;
 import java.lang.reflect.Method;

@@ -1,8 +1,8 @@
 package dev.acton.openapi.spring;
 
-import dev.acton.core.actor.Actor;
+import dev.acton.core.annotation.Actor;
 import io.swagger.v3.oas.models.OpenAPI;
-import java.util.Collection;
+import java.util.Map;
 import org.springdoc.core.customizers.OpenApiCustomizer;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -26,8 +26,8 @@ public class ActOnSpringdocAutoConfiguration {
     @Bean
     OpenApiCustomizer actonOpenApiCustomizer(ApplicationContext ctx, OpenApiGenerator generator) {
         return (OpenAPI springdocModel) -> {
-            Collection<Actor> actors = ctx.getBeansOfType(Actor.class).values();
-            var actonDoc = generator.generate(actors);
+            Map<String, Object> actors = ctx.getBeansWithAnnotation(Actor.class);
+            var actonDoc = generator.generate(actors.values());
             ActOnSpringdocMerger.mergeInto(springdocModel, actonDoc);
         };
     }

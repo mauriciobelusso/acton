@@ -1,8 +1,8 @@
-package dev.acton.router.spring;
+package dev.acton.spring;
 
-import dev.acton.core.actor.Actor;
+import dev.acton.core.annotation.Actor;
 import dev.acton.core.annotation.Contract;
-import dev.acton.router.spring.util.MethodUtils;
+import dev.acton.spring.util.MethodUtils;
 import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -26,8 +26,8 @@ final class ActOnMappingRegistrar implements SmartInitializingSingleton {
 
     @Override
     public void afterSingletonsInstantiated() {
-        Map<String, Actor> actors = ctx.getBeansOfType(Actor.class);
-        for (Actor actor : actors.values()) {
+        Map<String, Object> actors = ctx.getBeansWithAnnotation(Actor.class);
+        for (Object actor : actors.values()) {
             for (Method m : actor.getClass().getMethods()) {
                 var payloadOpt = MethodUtils.getPayload(m);
 

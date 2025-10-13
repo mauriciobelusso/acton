@@ -1,4 +1,4 @@
-package dev.acton.router.spring;
+package dev.acton.spring;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.acton.core.annotation.Contract;
