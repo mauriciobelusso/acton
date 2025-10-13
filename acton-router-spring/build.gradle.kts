@@ -10,7 +10,9 @@ repositories {
 }
 
 dependencies {
-    api(project(":acton-core"))
+    api(project(":acton-router"))
+    implementation("org.springframework.boot:spring-boot-starter-web:3.5.6")
+    implementation("tools.jackson.core:jackson-databind:3.0.0")
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 }

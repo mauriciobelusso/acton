@@ -1,22 +1,29 @@
 package dev.acton.core.annotation;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-/**
- * Declares a contract that defines an operation in the ActOn architecture.
- * A contract represents the intent of an action, similar to an endpoint or message.
- */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface Contract {
-    /**
-     * Unique name of the contract (e.g. "orders.create").
-     */
+    /** Name like "orders.create" or "orders.list". */
     String value();
 
-    /**
-     * Optional description for documentation or OpenAPI generation.
-     */
     String description() default "";
+
+    /** Optional HTTP override; omit for name-based defaults. */
+    Http http() default @Http;
+
+    enum Method { GET, POST, PUT, DELETE, PATCH }
+
+    @Target({})
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface Http {
+        Method method() default Method.POST;   // default if provided without fields
+        String path() default "";              // empty ⇒ derive from name
+    }
 }

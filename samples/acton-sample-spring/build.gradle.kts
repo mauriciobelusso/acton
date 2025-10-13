@@ -1,0 +1,23 @@
+plugins {
+    id("org.springframework.boot") version "3.5.6"
+    id("io.spring.dependency-management") version "1.1.7"
+    java
+}
+
+group = "dev.acton.sample"
+version = "0.1.0-SNAPSHOT"
+
+repositories { mavenCentral() }
+
+dependencies {
+    implementation(project(":acton-core"))
+    implementation(project(":acton-router"))
+    implementation(project(":acton-router-spring"))
+    implementation(project(":acton-openapi-spring"))
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.13")
+    implementation("org.springframework.boot:spring-boot-starter")
+}
+
+java {
+    toolchain { languageVersion.set(JavaLanguageVersion.of(21)) }
+}
