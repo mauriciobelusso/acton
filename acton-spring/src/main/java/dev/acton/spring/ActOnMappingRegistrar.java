@@ -2,6 +2,7 @@ package dev.acton.spring;
 
 import dev.acton.core.annotation.Actor;
 import dev.acton.core.annotation.Contract;
+import dev.acton.spring.util.HttpUtils;
 import dev.acton.spring.util.MethodUtils;
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -54,30 +55,9 @@ final class ActOnMappingRegistrar implements SmartInitializingSingleton {
         static HttpSpec from(Contract c) {
             var http = c.http();
             String name = c.value();
-            RequestMethod method = toSpring(http.method());
-            String path = !http.path().isEmpty() ? http.path() : derivePath(name);
+            RequestMethod method = HttpUtils.toSpringMethod(http.method());
+            String path = !http.path().isEmpty() ? http.path() : HttpUtils.derivePath(name);
             return new HttpSpec(method, path, http.consumes(), http.produces());
-        }
-
-        private static RequestMethod toSpring(Contract.Http.Method m) {
-            return switch (m) {
-                case GET -> RequestMethod.GET;
-                case POST -> RequestMethod.POST;
-                case PUT -> RequestMethod.PUT;
-                case DELETE -> RequestMethod.DELETE;
-                case PATCH -> RequestMethod.PATCH;
-            };
-        }
-
-        private static String derivePath(String name) {
-            String[] p = name.split("\\.");
-            String res = p[0];
-            String op  = p.length > 1 ? p[1] : "post";
-            return switch (op) {
-                case "list", "get", "find", "create", "add" -> "/" + res;
-                case "update", "delete", "remove"           -> "/" + res + "/{id}";
-                default                                     -> "/" + name;
-            };
         }
     }
 }
