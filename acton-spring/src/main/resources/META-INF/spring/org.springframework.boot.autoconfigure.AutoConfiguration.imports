@@ -1,1 +1,2 @@
 dev.acton.spring.ActOnSpringAutoConfiguration
+dev.acton.spring.store.ActOnStoreAutoConfiguration

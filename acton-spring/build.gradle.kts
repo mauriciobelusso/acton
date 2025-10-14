@@ -1,6 +1,10 @@
 plugins {
     `java-library`
+    java
+    id("org.springframework.boot") version "3.5.6"
+    id("io.spring.dependency-management") version "1.1.7"
 }
+
 
 group = "dev.acton"
 version = "0.1.0-SNAPSHOT"
@@ -11,11 +15,11 @@ repositories {
 
 dependencies {
     api(project(":acton-core"))
-    implementation("org.springframework.boot:spring-boot-starter-web:3.5.6")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     compileOnly("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.13")
     compileOnly("org.springdoc:springdoc-openapi-starter-webflux-ui:2.8.13")
-    testImplementation(platform("org.junit:junit-bom:5.10.0"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 java {
