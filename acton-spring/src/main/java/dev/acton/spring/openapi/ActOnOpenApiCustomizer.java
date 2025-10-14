@@ -1,4 +1,4 @@
-package dev.acton.openapi.spring;
+package dev.acton.spring.openapi;
 
 import dev.acton.core.annotation.Actor;
 import dev.acton.core.annotation.Contract;

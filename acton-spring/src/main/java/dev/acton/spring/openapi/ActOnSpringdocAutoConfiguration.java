@@ -1,4 +1,4 @@
-package dev.acton.openapi.spring;
+package dev.acton.spring.openapi;
 
 import org.springdoc.core.customizers.OpenApiCustomizer;
 import org.springframework.boot.autoconfigure.AutoConfiguration;

@@ -12,7 +12,6 @@ repositories { mavenCentral() }
 dependencies {
     implementation(project(":acton-core"))
     implementation(project(":acton-spring"))
-    implementation(project(":acton-spring-openapi"))
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.13")
     implementation("org.springframework.boot:spring-boot-starter")
     runtimeOnly("com.h2database:h2")
