@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 @Documented
 public @interface Contract {
     /** Name like "orders.create" or "orders.list". */
-    String value();
+    String value() default "";
 
     String description() default "";
 

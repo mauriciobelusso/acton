@@ -1,0 +1,3 @@
+dev.acton.spring.store.ActOnStoreInjectionConfig
+dev.acton.spring.store.JpaStoreAutoConfiguration
+dev.acton.spring.store.InMemoryStoreAutoConfiguration

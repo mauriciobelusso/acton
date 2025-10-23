@@ -3,41 +3,16 @@ plugins {
     `maven-publish`
 }
 
-group = "dev.acton"
-version = "0.1.0-SNAPSHOT"
-description = "ActOn Core — Foundation of the ActOn Framework"
-
-java {
-    toolchain { languageVersion.set(JavaLanguageVersion.of(21)) }
-    withSourcesJar()
-    withJavadocJar()
-}
-
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
+    compileOnly("jakarta.persistence:jakarta.persistence-api:3.1.0")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.11.0")
 }
 
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
-            pom {
-                name.set("ActOn Core")
-                description.set("Core building blocks: Contract, Actor, Store.")
-                url.set("https://github.com/mauriciobelusso/acton")
-                licenses {
-                    license {
-                        name.set("Apache License 2.0")
-                        url.set("https://www.apache.org/licenses/LICENSE-2.0")
-                    }
-                }
-                developers {
-                    developer {
-                        id.set("mauriciobelusso")
-                        name.set("Mauricio Belusso")
-                    }
-                }
-            }
+            artifactId = "acton-core"
         }
     }
 }
